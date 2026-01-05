@@ -1,0 +1,25 @@
+/* packages/core/src/styles/tokens.css */
+
+:root {
+  /* Celestia Core Palette - OKLCH (Perceptual Fidelity) */
+  --ce-brand-500: oklch(60% 0.22 280);    /* Roxo Principal (A Alma) */
+  --ce-accent-500: oklch(75% 0.15 210);   /* Azul Acento (A Centelha) */
+  --ce-void: oklch(15% 0.04 280);         /* Fundo Dark Profundo (O Espaço) */
+  --ce-cloud: oklch(95% 0.01 280);        /* Texto Principal (A Luz) */
+
+  /* Semantic Tokens */
+  --ce-bg-main: var(--ce-void);
+  --ce-text-main: var(--ce-cloud);
+  
+  /* Gradiente Oficial */
+  --ce-gradient-main: linear-gradient(
+    135deg, 
+    var(--ce-accent-500), 
+    var(--ce-brand-500)
+  );
+
+  /* Typography Families */
+  --ce-font-sans: 'Geist Sans', system-ui, sans-serif;
+  --ce-font-mono: 'Geist Mono', monospace;
+  --ce-font-serif: 'Lora', serif;
+}
