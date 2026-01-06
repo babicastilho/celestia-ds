@@ -1,0 +1,205 @@
+---
+// apps/docs/src/components/Sidebar.astro
+import { Icon } from 'astro-icon/components';
+
+const pathname = new URL(Astro.request.url).pathname;
+
+// Lógica de estado inicial (mantém-se igual)
+const isFoundationsActive = pathname === '/' || pathname.includes('/colors') || pathname.includes('/typography');
+const isComponentsActive = pathname.includes('/components') || pathname.includes('/buttons');
+---
+<aside class="sidebar">
+    <div class="sidebar-main">
+        <nav class="side-nav" id="accordion-nav">
+            
+            <div class:list={["accordion-item", { "is-active": isFoundationsActive }]}>
+                <button class="accordion-trigger" aria-expanded={isFoundationsActive}>
+                    Foundations
+                    <span class="chevron-wrap">
+                        <Icon name="lucide:chevron-down" />
+                    </span>
+                </button>
+                <div class="accordion-wrapper">
+                    <div class="accordion-content">
+                        <a href="/" class={pathname === '/' ? 'active' : ''}>Overview</a>
+                        <a href="/colors" class={pathname.includes('/colors') ? 'active' : ''}>Colors (OKLCH)</a>
+                        <a href="/typography" class={pathname.includes('/typography') ? 'active' : ''}>Typography</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class:list={["accordion-item", { "is-active": isComponentsActive }]}>
+                <button class="accordion-trigger" aria-expanded={isComponentsActive}>
+                    Components
+                    <span class="chevron-wrap">
+                        <Icon name="lucide:chevron-down" />
+                    </span>
+                </button>
+                <div class="accordion-wrapper">
+                    <div class="accordion-content">
+                        <a href="#" class={pathname.includes('/buttons') ? 'active' : ''}>Buttons</a>
+                        <a href="#" class={pathname.includes('/inputs') ? 'active' : ''}>Inputs</a>
+                        <a href="#">Cards</a>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+
+    <div class="mobile-utility">
+        <a href="#" aria-label="Docs"><span class="icon-wrap"><Icon name="lucide:book-open" /></span></a>
+        <a href="https://github.com/babicastilho/celestia-ds" target="_blank" aria-label="GitHub"><span class="icon-wrap"><Icon name="lucide:github" /></span></a>
+        <a href="#" aria-label="Settings"><span class="icon-wrap"><Icon name="lucide:settings" /></span></a>
+    </div>
+</aside>
+
+<script>
+    // Script de animação (Vanilla JS leve)
+    const accordion = document.getElementById('accordion-nav');
+    // Usa seletor direto para evitar erros se o elemento não existir
+    if (accordion) {
+        const triggers = accordion.querySelectorAll('.accordion-trigger');
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const clickedItem = (e.currentTarget as HTMLElement).closest('.accordion-item');
+                if (!clickedItem) return;
+
+                const isAlreadyOpen = clickedItem.classList.contains('is-active');
+
+                // 1. Fecha todos os outros
+                accordion.querySelectorAll('.accordion-item.is-active').forEach(item => {
+                    if (item !== clickedItem) {
+                        item.classList.remove('is-active');
+                        const btn = item.querySelector('.accordion-trigger');
+                        if (btn) btn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // 2. Toggle do atual
+                if (isAlreadyOpen) {
+                    clickedItem.classList.remove('is-active');
+                    trigger.setAttribute('aria-expanded', 'false');
+                } else {
+                    clickedItem.classList.add('is-active');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    }
+</script>
+
+<style>
+    /* --- ESTRUTURA GERAL --- */
+    .sidebar {
+        grid-area: sidebar;
+        background: var(--ce-bg-glass); 
+        backdrop-filter: blur(16px);
+        border-right: 1px solid var(--ce-border);
+        display: flex; flex-direction: column;
+        height: 100%;
+        transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .sidebar-main { flex: 1; padding: 2rem 1.5rem; overflow-y: auto; }
+
+    /* --- ITEM DO ACORDEÃO --- */
+    .accordion-item {
+        border-bottom: 1px solid transparent;
+        transition: 0.3s;
+        margin-bottom: 0.5rem;
+    }
+
+    /* BOTÃO DE TÍTULO */
+    .accordion-trigger {
+        width: 100%;
+        background: none; border: none; padding: 0.6rem 0;
+        text-align: left;
+        font-family: var(--ce-font-sans); /* Garante a fonte correta */
+        font-size: 0.7rem; 
+        text-transform: uppercase; 
+        color: var(--ce-title-sidebar); /* Azul/Accent restaurado */
+        font-weight: 800; 
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .accordion-trigger:hover { opacity: 0.8; }
+
+    /* O WRAPPER DO ÍCONE (Resolve o erro do TS e roda a seta) */
+    .chevron-wrap {
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        opacity: 0.5;
+        color: var(--ce-text-muted);
+    }
+    
+    /* Rotação quando ativo */
+    .accordion-item.is-active .chevron-wrap {
+        transform: rotate(180deg);
+        opacity: 1;
+        color: var(--ce-brand);
+    }
+
+    /* --- ANIMAÇÃO DE ALTURA (CSS Grid Trick) --- */
+    .accordion-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .accordion-content {
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    /* ESTADO ABERTO */
+    .accordion-item.is-active .accordion-wrapper {
+        grid-template-rows: 1fr;
+    }
+    
+    .accordion-item.is-active .accordion-content {
+        opacity: 1;
+        transition-delay: 0.1s; /* Suavidade extra */
+    }
+    
+    .accordion-item.is-active {
+        padding-bottom: 1rem; /* Espaço extra quando aberto */
+    }
+
+    /* --- LINKS INTERNOS --- */
+    .accordion-content a { 
+        display: block; padding: 0.6rem 0.8rem; text-decoration: none; 
+        color: var(--ce-text-muted); font-weight: 500; font-size: 0.9rem;
+        transition: 0.2s; border-radius: 4px;
+        border-left: 1px solid var(--ce-border);
+        margin-left: 0.5rem; /* Indentação visual */
+    }
+    .accordion-content a:hover { color: var(--ce-brand); background: rgba(125, 125, 125, 0.05); }
+    .accordion-content a.active { color: var(--ce-brand); background: rgba(125, 125, 125, 0.08); font-weight: 600; }
+
+    /* --- MOBILE --- */
+    .mobile-utility { display: none; }
+    .icon-wrap { font-size: 1.4rem; display: flex; }
+
+    @media (max-width: 1024px) {
+        .sidebar {
+            position: fixed; top: 64px; left: 0; width: 280px; height: calc(100vh - 64px);
+            z-index: 90; transform: translateX(-100%); transition: 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+            background: var(--ce-bg-main); 
+        }
+        .mobile-utility { 
+            display: flex; justify-content: space-around; padding: 1.5rem; 
+            border-top: 1px solid var(--ce-border); 
+            color: var(--ce-icon-main);
+        }
+        .mobile-utility a { color: inherit; opacity: 0.6; transition: 0.3s; }
+        .mobile-utility a:hover { opacity: 1; color: var(--ce-brand); }
+    }
+</style>

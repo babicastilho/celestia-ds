@@ -1,25 +1,65 @@
 /* packages/core/src/styles/tokens.css */
 
 :root {
-  /* Celestia Core Palette - OKLCH (Perceptual Fidelity) */
-  --ce-brand-500: oklch(60% 0.22 280);    /* Roxo Principal (A Alma) */
-  --ce-accent-500: oklch(75% 0.15 210);   /* Azul Acento (A Centelha) */
-  --ce-void: oklch(15% 0.04 280);         /* Fundo Dark Profundo (O Espaço) */
-  --ce-cloud: oklch(95% 0.01 280);        /* Texto Principal (A Luz) */
-
-  /* Semantic Tokens */
-  --ce-bg-main: var(--ce-void);
-  --ce-text-main: var(--ce-cloud);
+  /* --- PRIMITIVAS --- */
+  --ce-brand-500: oklch(60% 0.22 280); /* Roxo Elétrico */
+  --ce-accent-500: oklch(75% 0.15 210); /* Azul Esverdeado */
   
-  /* Gradiente Oficial */
-  --ce-gradient-main: linear-gradient(
-    135deg, 
-    var(--ce-accent-500), 
-    var(--ce-brand-500)
-  );
+  /* --- DARK MODE (O Teu "Void" Original) --- */
+  --ce-void: oklch(15% 0.04 280);
+  --ce-cloud: oklch(95% 0.01 280);
+  
+  /* Estrutura */
+  --ce-bg-main: var(--ce-void);
+  --ce-bg-glass: rgba(10, 10, 15, 0.7); /* Vidro fumado */
+  --ce-bg-card: oklch(20% 0.04 280);    /* Cartão ligeiramente mais claro que o fundo */
+  --ce-bg-footer: rgba(10, 10, 15, 0.95);
+  
+  /* Detalhes */
+  --ce-border: rgba(255, 255, 255, 0.08); /* Borda subtil no escuro */
+  --ce-shadow: 0 4px 20px rgba(0,0,0,0.3); /* Sombra profunda */
 
-  /* Typography Families */
+  /* Texto & Ícones */
+  --ce-text-main: var(--ce-cloud);
+  --ce-text-muted: oklch(70% 0.05 280);
+  --ce-icon-main: var(--ce-cloud); 
+
+  --ce-brand: var(--ce-brand-500);
+  --ce-title-sidebar: var(--ce-accent-500); 
+  --ce-status-active: oklch(80% 0.25 150);
+  
+  /* Fontes */
   --ce-font-sans: 'Geist Sans', system-ui, sans-serif;
   --ce-font-mono: 'Geist Mono', monospace;
   --ce-font-serif: 'Lora', serif;
+}
+
+/* --- LIGHT MODE (Ajuste de Contraste) --- */
+html[data-theme='light'], :root:not(.dark) {
+  /* Fundo: "Cinza Névoa" (não branco puro) para dar contraste aos cartões */
+  --ce-bg-main: oklch(96% 0.01 280); 
+  
+  /* Vidro: Branco translúcido */
+  --ce-bg-glass: rgba(255, 255, 255, 0.85); 
+  
+  /* Footer: Um tom sólido para ancorar a página */
+  --ce-bg-footer: oklch(93% 0.02 280);
+  
+  /* Cartões: BRANCO PURO para saltar do fundo cinza */
+  --ce-bg-card: #ffffff; 
+  
+  /* Bordas: Mais nítidas no light mode para definir limites */
+  --ce-border: rgba(0, 0, 0, 0.08); 
+  
+  /* Sombra: Suave, mas essencial para profundidade no claro */
+  --ce-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Texto */
+  --ce-text-main: oklch(20% 0.05 280); /* Preto suave */
+  --ce-text-muted: oklch(45% 0.05 280);
+  --ce-icon-main: oklch(30% 0.05 280);
+  
+  /* Marca */
+  --ce-brand: oklch(55% 0.22 280);
+  --ce-title-sidebar: oklch(45% 0.15 210); /* Accent legível no claro */
 }
