@@ -1,67 +1,119 @@
 ---
-// src/pages/index.astro
-const title = "Celestia | Design Engineering";
-const slogan = "Where Logic Meets Aesthetics";
-
-import '../../../../packages/core/src/styles/tokens.css';
+// apps/docs/src/pages/index.astro
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css">
-		<title>{title}</title>
-		<style>
-			body {
-				background: var(--ce-bg-main);
-				color: var(--ce-text-main);
-				font-family: var(--ce-font-sans);
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				height: 100vh;
-				margin: 0;
-			}
+<MainLayout title="Celestia | Design Engineering Manifesto">
+  <div class="hero">
+    <h1 class="title">Design Engineering Manifesto</h1>
 
-			h1 {
-        font-family: var(--ce-font-serif);
-        font-size: 4rem;
-        font-weight: 700;
-				background: var(--ce-gradient-main);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				margin: 0;
-				letter-spacing: -0.02em;
-			}
+    <p class="lead">
+      In 2026, the gap between design intent and production reality has
+      vanished. Code is no longer just a vessel for aesthetics; it <strong
+        >is</strong
+      > the aesthetic.
+    </p>
 
-			p { 
-				font-style: italic; 
-				opacity: 0.7; 
-				font-size: 1.2rem; 
-				margin-top: 0.5rem;
-			}
+    <div class="feature-grid">
+      <div class="card">
+        <span class="number">01</span>
+        <h3>Systemic Logic</h3>
+        <p>
+          Rigorous implementation through Monorepo architectures and OKLCH color
+          tokens.
+        </p>
+      </div>
 
-			.status-container {
-				margin-top: 2.5rem;
-				padding: 0.5rem 1rem;
-				border: 1px solid var(--ce-brand-500);
-				border-radius: 4px;
-				font-family: monospace;
-				color: var(--ce-accent-500);
-			}
-		</style>
-	</head>
-	<body>
-		<h1>{title}</h1>
-		<p>{slogan}</p>
-		
-		<div class="status-container">
-			[ System Status: Online ]
-		</div>
-	</body>
-</html>
+      <div class="card">
+        <span class="number">02</span>
+        <h3>Visual Emotion</h3>
+        <p>
+          Curated typography using Lora for authority and Geist for clarity.
+        </p>
+      </div>
+    </div>
+  </div>
+</MainLayout>
+
+<style>
+  .hero {
+    max-width: 1000px;
+  }
+
+  .title {
+    font-family: var(--ce-font-serif);
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+
+    background: var(--ce-gradient-main);
+    background-color: var(--ce-brand-500); /* Fallback caso o gradiente falhe */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lead {
+    font-size: 1.5rem;
+    opacity: 0.7;
+    margin: 2rem 0 4rem 0;
+    max-width: 700px;
+    font-weight: 300;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--ce-bg-card);
+    border: 1px solid var(--ce-border);
+    padding: 2.5rem;
+    border-radius: 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--ce-shadow);
+  }
+
+  .card:hover {
+    border-color: var(--ce-brand-500);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-8px);
+  }
+
+  .number {
+    font-family: var(--ce-font-mono);
+    color: var(--ce-accent-500);
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  .card h3 {
+    font-family: var(--ce-font-serif);
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+  }
+  .card p {
+    opacity: 0.5;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .status-footer {
+    margin-top: 6rem;
+    font-family: var(--ce-font-mono);
+    font-size: 0.7rem;
+    opacity: 0.3;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .engine-on {
+    color: oklch(80% 0.2 150);
+  }
+</style>
