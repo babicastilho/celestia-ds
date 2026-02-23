@@ -1,0 +1,16 @@
+.action-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background-color: var(--ce-text-main); color: var(--ce-bg-main);
+  padding: 0.6rem 1.2rem; border-radius: 6px; border: none;
+  font-weight: 600; cursor: pointer; font-size: 0.9rem;
+  transition: opacity 0.2s; font-family: inherit;
+}
+.action-btn:hover { opacity: 0.9; }
+
+.secondary-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; color: var(--ce-text-muted);
+  width: 38px; height: 38px; border-radius: 6px;
+  border: 1px solid var(--ce-border); cursor: pointer; transition: all 0.2s;
+}
+.secondary-btn:hover { color: var(--ce-text-main); border-color: var(--ce-text-main); }

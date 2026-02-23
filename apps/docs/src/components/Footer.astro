@@ -1,73 +1,15 @@
 ---
 // apps/docs/src/components/Footer.astro
 ---
-<footer class="bottom-bar">
+<div class="bottom-bar">
   <div class="footer-left">
       <span class="status-item">
           <span class="pulse-green"></span>
           <span class="label">ENGINE:</span> <span class="active-green">ACTIVE</span>
       </span>
-      
-      <span class="sep desktop-only">//</span> 
       <span class="status-item desktop-only">
           <span class="label">ENV:</span> <code>FEAT/APP-SHELL</code>
       </span>
   </div>
-
   <div class="version">V0.1.0-ALPHA</div>
-</footer>
-
-<style>
-  .bottom-bar {
-      grid-area: footer;
-      background: var(--ce-bg-footer);
-      border-top: 1px solid var(--ce-border);
-      padding: 0 2rem;
-      
-      font-family: var(--ce-font-mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--ce-text-muted);
-      transition: background 0.3s ease;
-      
-      /* A Mágica do Flex: Separa os dois grupos extremos */
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  }
-
-  /* Grupo da Esquerda */
-  .footer-left { 
-      display: flex; 
-      align-items: center; 
-      gap: 1rem; 
-  }
-
-  .status-item { display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
-  
-  .label { opacity: 0.5; }
-  .sep { opacity: 0.3; }
-  .version { opacity: 0.5; }
-
-  .pulse-green { 
-      width: 6px; height: 6px; 
-      background: var(--ce-status-active); 
-      border-radius: 50%; 
-      box-shadow: 0 0 8px var(--ce-status-active); 
-  }
-  .active-green { color: var(--ce-status-active); font-weight: 700; }
-  
-  code { 
-      color: var(--ce-accent-500); 
-      background: rgba(125,125,125,0.1); 
-      padding: 2px 5px; 
-      border-radius: 3px; 
-  }
-
-  /* Mobile: Ajustes */
-  @media (max-width: 1024px) {
-      .bottom-bar { padding: 0 1rem; min-height: 40px; }
-      .desktop-only { display: none; }
-  }
-</style>
+</div>

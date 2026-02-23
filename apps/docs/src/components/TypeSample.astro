@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+const { label, value, variable, family = "--ce-font-interface", tag: Tag = "p" } = Astro.props;
+---
+<div class="specimen-block">
+  <div class="specimen-header">
+    <span class="specimen-label">{label}</span>
+    <code class="specimen-meta">{value}</code>
+    <button class="specimen-meta copy-trigger" data-copy={variable} title="Copiar Token">
+      <span>{variable}</span>
+      <Icon name="lucide:copy" class="copy-icon" />
+    </button>
+  </div>
+
+  <div class="specimen-preview">
+    <Tag style={`font-family: var(${family}) !important; font-size: var(${variable}) !important;`}>
+      O Celestia é um sistema modular e adaptável para interfaces modernas.
+    </Tag>
+  </div>
+</div>
+
+<style>
+  .specimen-block { display: flex; flex-direction: column; align-items: center; padding: 4rem 0; border-bottom: 1px solid var(--ce-border); width: 100%; }
+  .specimen-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .specimen-label { font-family: "Geist Mono"; font-weight: 800; font-size: 0.85rem; color: var(--ce-brand-500); text-transform: uppercase; letter-spacing: 0.15em; }
+  
+  .specimen-meta { 
+    font-family: "Geist Mono"; font-size: 0.7rem; color: var(--ce-text-muted); 
+    background: rgba(255, 255, 255, 0.05); padding: 4px 10px; border-radius: 6px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  button.copy-trigger { cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.2s; }
+  button.copy-trigger:hover { background: var(--ce-brand-500); color: white; border-color: var(--ce-brand-500); }
+  .copy-icon { font-size: 0.8rem; }
+
+  .specimen-preview { 
+    width: 100%; max-width: 900px; padding: 3rem; background: rgba(255, 255, 255, 0.02); 
+    border-radius: 16px; border-left: 4px solid var(--ce-brand-500); 
+    display: flex; justify-content: center; align-items: center; min-height: 180px; text-align: center; 
+  }
+  .specimen-preview :global(*) { margin: 0; color: var(--ce-text-main); line-height: 1.1; }
+</style>

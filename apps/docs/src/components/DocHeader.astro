@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon/components';
+const { title, badge, intro } = Astro.props;
+---
+<header class="doc-header">
+  <div class="header-content">
+      <h1>{title} {badge && <span class="badge">{badge}</span>}</h1>
+      {intro && <p class="doc-intro">{intro}</p>}
+  </div>
+  <div class="header-actions">
+      <slot name="actions" />
+  </div>
+</header>
+
+<style>
+  .doc-header { margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .doc-header h1 { font-family: 'Lora', serif; font-size: clamp(1.8rem, 8vw, 2.5rem); margin: 0; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .badge { font-family: 'Geist Mono'; font-size: 0.7rem; background: var(--ce-brand-500); color: white; padding: 2px 8px; border-radius: 4px; }
+  .doc-intro { color: var(--ce-text-muted); margin-top: 0.5rem; font-size: 0.95rem; }
+  .header-actions { display: flex; gap: 0.75rem; width: 100%; align-items: center; }
+
+  @media (min-width: 768px) {
+    .doc-header { flex-direction: row; justify-content: space-between; align-items: center; }
+    .header-actions { width: auto; }
+  }
+</style>

@@ -1,0 +1,19 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+    --ce-transition-theme: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body {
+    margin: 0; padding: 0;
+    font-family: 'Geist Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--ce-bg-main);
+    color: var(--ce-text-main);
+    -webkit-font-smoothing: antialiased;
+    height: 100vh; width: 100vw; overflow: hidden;
+    transition: var(--ce-transition-theme);
+}
+
+header, aside, main, footer, section, div, .ramp-item, code {
+    transition: var(--ce-transition-theme);
+}

@@ -1,0 +1,72 @@
+/* --- TOKENS: FAMÍLIAS TIPOGRÁFICAS --- */
+:root {
+  --ce-font-authority: 'Lora', serif;
+  --ce-font-interface: 'Geist', system-ui, -apple-system, sans-serif;
+  --ce-font-engineering: 'Geist Mono', monospace;
+
+  /* --- TOKENS: ESCALA DE TAMANHOS (TYPE SCALE) --- */
+  /* Estes tokens alimentam a tua página de Foundations e garantem a escala vertical */
+  --ce-size-5xl: 3rem;     /* 48px */
+  --ce-size-4xl: 2.25rem;  /* 36px */
+  --ce-size-3xl: 1.875rem; /* 30px */
+  --ce-size-2xl: 1.5rem;   /* 24px */
+  --ce-size-xl: 1.25rem;   /* 20px */
+  --ce-size-lg: 1.125rem;  /* 18px */
+  --ce-size-base: 1rem;    /* 16px */
+  --ce-size-sm: 0.875rem;  /* 14px */
+  --ce-size-xs: 0.75rem;   /* 12px */
+
+  /* --- TOKENS: HIERARQUIA (HEADINGS) --- */
+  /* Estes tokens alimentam a secção Hierarchy na documentação */
+  --ce-h1: 2rem;           /* 32px */
+  --ce-h2: 1.5rem;         /* 24px */
+  --ce-h3: 1.25rem;        /* 20px */
+}
+
+/* --- ESTILOS GLOBAIS --- */
+body {
+  font-family: var(--ce-font-interface);
+  font-size: var(--ce-size-base);
+  color: var(--ce-text-main);
+  background-color: var(--ce-bg-main);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 { 
+  font-family: var(--ce-font-authority); 
+  font-weight: 700;
+  color: var(--ce-text-main);
+  line-height: 1.2;
+}
+
+/* Aplicando os tokens nos elementos base para consistência total */
+h1 { 
+  font-size: var(--ce-size-5xl); 
+  letter-spacing: -0.02em; 
+  margin-bottom: 1.5rem; 
+}
+
+h2 { 
+  font-size: var(--ce-h2); 
+  margin-top: 2rem; 
+  margin-bottom: 1rem; 
+}
+
+h3 { 
+  font-size: var(--ce-h3); 
+}
+
+.hero-title {
+  font-family: var(--ce-font-authority);
+  font-size: clamp(3rem, 8vw, 5rem);
+  background: var(--ce-gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tipografia de Engenharia aplicada automaticamente às labels da documentação */
+code, pre, .mono, .version, .specimen-label, .specimen-meta { 
+  font-family: var(--ce-font-engineering); 
+}

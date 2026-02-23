@@ -1,0 +1,203 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import DocHeader from '../components/DocHeader.astro';
+import DocSection from '../components/DocSection.astro';
+import ColorSwatch from '../components/ColorSwatch.astro';
+import { Icon } from 'astro-icon/components';
+
+const reactivePalettes = [
+  { name: 'Brand Identity', prefix: '--ce-brand', hex: '#9d5be3', description: 'Cor principal da marca.' },
+  { name: 'Accent', prefix: '--ce-accent', hex: '#2dd4bf', description: 'Cor de destaque.' }
+];
+
+const staticPalettes = [
+  { name: 'Red', prefix: '--ce-red' }, { name: 'Orange', prefix: '--ce-orange' },
+  { name: 'Amber', prefix: '--ce-amber' }, { name: 'Yellow', prefix: '--ce-yellow' },
+  { name: 'Lime', prefix: '--ce-lime' }, { name: 'Green', prefix: '--ce-green' },
+  { name: 'Emerald', prefix: '--ce-emerald' }, { name: 'Teal', prefix: '--ce-teal' },
+  { name: 'Cyan', prefix: '--ce-cyan' }, { name: 'Sky', prefix: '--ce-sky' },
+  { name: 'Blue', prefix: '--ce-blue' }, { name: 'Indigo', prefix: '--ce-indigo' },
+  { name: 'Violet', prefix: '--ce-violet' }, { name: 'Purple', prefix: '--ce-purple' },
+  { name: 'Fuchsia', prefix: '--ce-fuchsia' }, { name: 'Pink', prefix: '--ce-pink' },
+  { name: 'Rose', prefix: '--ce-rose' }, { name: 'Slate', prefix: '--ce-slate' },
+];
+
+const stops = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+
+const tocHeadings = [
+    { id: 'reactive-section', text: 'Reactive Identity' },
+    { text: 'Utility Palette', isDivider: true }, 
+    ...staticPalettes.map(p => ({ id: `color-${p.name.toLowerCase()}`, text: p.name }))
+];
+---
+
+<MainLayout title="Theme Builder" headings={tocHeadings}>
+  <DocHeader title="Colors & Tokens" badge="OKLCH" intro="Personalize a identidade ou consulte os tokens utilitários.">
+    <button slot="actions" id="reset-btn" class="secondary-btn" title="Reset"><Icon name="lucide:rotate-ccw" /></button>
+    <button slot="actions" id="export-btn" class="action-btn"><Icon name="lucide:code" /> <span>Exportar</span></button>
+  </DocHeader>
+
+  <div class="palette-container">
+    <section id="reactive-section">
+        {reactivePalettes.map((p) => (
+          <DocSection title={p.name}>
+            <div slot="header-extra" class="palette-header-right">
+               <p class="palette-desc">{p.description}</p>
+               <label class="color-control">
+                  <span>Base (500):</span>
+                  <div class="picker-wrapper">
+                      <input type="color" class="interactive-picker" value={p.hex} data-target={p.prefix} />
+                  </div>
+               </label>
+            </div>
+            {stops.map((s) => <ColorSwatch token={`${p.prefix}-${s}`} stop={s} />)}
+          </DocSection>
+        ))}
+    </section>
+
+    <div class="big-divider"><span class="divider-text">UTILITY PALETTE</span></div>
+
+    {staticPalettes.map((p) => (
+      <DocSection title={p.name} id={`color-${p.name.toLowerCase()}`} badge="FIXED">
+        {stops.map((s) => <ColorSwatch token={`${p.prefix}-${s}`} stop={s} />)}
+      </DocSection>
+    ))}
+  </div>
+
+  <dialog id="export-dialog" class="ce-dialog">
+    <div class="dialog-content">
+        <div class="dialog-header"><h3>CSS Tokens Export</h3><button class="close-x" data-close="export-dialog"><Icon name="lucide:x" /></button></div>
+        <div class="code-block"><pre><code id="generated-code"></code></pre></div>
+        <button id="copy-code-btn" class="action-btn-primary">Copiar para Clipboard</button>
+    </div>
+  </dialog>
+
+  <dialog id="reset-dialog" class="ce-dialog">
+    <div class="dialog-content">
+        <div class="dialog-header"><h3>Reset Theme</h3><button class="close-x" data-close="reset-dialog"><Icon name="lucide:x" /></button></div>
+        <p class="dialog-msg">Deseja realmente limpar todas as personalizações de cores e voltar aos padrões da marca?</p>
+        <div class="dialog-footer">
+            <button class="ghost-btn" data-close="reset-dialog">Cancelar</button>
+            <button id="confirm-reset-btn" class="danger-btn">Sim, Limpar Tudo</button>
+        </div>
+    </div>
+  </dialog>
+</MainLayout>
+
+<script>
+  const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+  const STORAGE_KEY = 'celestia-theme-config';
+  const DEFAULT_THEME = { '--ce-brand-500': '#9d5be3', '--ce-accent-500': '#2dd4bf' };
+
+  function getLiveValues(cssColor) {
+    if (!ctx) return { rgb: '---', hex: '---' };
+    ctx.fillStyle = cssColor; ctx.fillRect(0, 0, 1, 1);
+    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+    return { rgb: `rgb(${r}, ${g}, ${b})`, hex: "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase() };
+  }
+
+  function updateDisplay() {
+    document.querySelectorAll('.ramp-item').forEach(item => {
+      const swatch = item.querySelector('.swatch');
+      const lchLabel = item.querySelector('.oklch-value');
+      const rgbLabel = item.querySelector('.rgb-value');
+      const hexLabel = item.querySelector('.hex-value');
+      
+      if (swatch) {
+        const color = window.getComputedStyle(swatch).backgroundColor;
+        const { rgb, hex } = getLiveValues(color);
+        
+        if (lchLabel && color.includes('oklch')) {
+          const coords = color.match(/[\d.]+/g);
+          if (coords && coords.length >= 3) {
+            const [l, c, h] = coords.map(Number);
+            lchLabel.textContent = `${l.toFixed(2)} ${c.toFixed(2)} ${Math.round(h)}`;
+          }
+        }
+        if (rgbLabel) rgbLabel.textContent = rgb.replace('rgb(', '').replace(')', '');
+        if (hexLabel) hexLabel.textContent = hex;
+      }
+    });
+  }
+
+  function applyTheme(theme) {
+      Object.entries(theme).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+      document.querySelectorAll('.interactive-picker').forEach(p => {
+          const v = theme[`${p.dataset.target}-500`]; if(v) p.value = v;
+      });
+      setTimeout(updateDisplay, 50);
+  }
+
+  document.getElementById('export-btn')?.addEventListener('click', () => {
+    let code = ':root {\n';
+    document.querySelectorAll('.ramp-item').forEach(item => {
+        const varName = item.querySelector('.val').textContent.trim();
+        const swatch = item.querySelector('.swatch');
+        const color = window.getComputedStyle(swatch).backgroundColor;
+        const { rgb } = getLiveValues(color);
+        code += `  ${varName}: ${rgb};\n`;
+    });
+    document.getElementById('generated-code').textContent = code.trim() + '\n}';
+    document.getElementById('export-dialog')?.showModal();
+  });
+
+  document.getElementById('reset-btn')?.addEventListener('click', () => {
+    document.getElementById('reset-dialog')?.showModal();
+  });
+
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.getElementById(btn.getAttribute('data-close'))?.close();
+    });
+  });
+
+  document.getElementById('confirm-reset-btn')?.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    applyTheme(DEFAULT_THEME);
+    document.getElementById('reset-dialog')?.close();
+  });
+
+  document.querySelectorAll('.interactive-picker').forEach(p => {
+      p.addEventListener('input', (e) => {
+          const v = e.target.value; const k = `${e.target.dataset.target}-500`;
+          document.documentElement.style.setProperty(k, v);
+          let curr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          curr[k] = v; localStorage.setItem(STORAGE_KEY, JSON.stringify(curr));
+          updateDisplay();
+      });
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    applyTheme(saved ? JSON.parse(saved) : DEFAULT_THEME);
+  });
+</script>
+
+<style>
+  .palette-container { display: flex; flex-direction: column; gap: 4rem; padding-bottom: 5rem; }
+  .palette-header-right { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+  .palette-desc { color: var(--ce-text-muted); font-size: 0.85rem; margin: 0; }
+  @media (min-width: 768px) { .palette-header-right { flex-direction: row; align-items: center; } }
+
+  .color-control { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--ce-bg-card); padding: 0.6rem 1rem; border-radius: 50px; border: 1px solid var(--ce-border); width: 100%; max-width: 320px; }
+  .picker-wrapper { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 2px solid white; position: relative; display: flex; flex-shrink: 0; }
+  .interactive-picker { position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; transform: translate(-50%, -50%); border: none; cursor: pointer; padding: 0; margin: 0; }
+
+  .big-divider { display: flex; justify-content: center; margin: 3rem 0; position: relative; }
+  .big-divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--ce-border); }
+  .divider-text { background: var(--ce-bg-main); padding: 0 1.25rem; z-index: 1; color: var(--ce-text-muted); font-weight: bold; font-size: 0.75rem; letter-spacing: 0.15em; }
+
+  .ce-dialog { background: #121214; border: 1px solid var(--ce-border); border-radius: 12px; padding: 0; color: white; width: calc(100% - 2rem); max-width: 520px; }
+  .ce-dialog::backdrop { background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
+  .dialog-content { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .dialog-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--ce-border); padding-bottom: 1rem; }
+  .dialog-header h3 { margin: 0; font-family: 'Lora', serif; font-size: 1.3rem; }
+  .code-block { background: #080809; padding: 1rem; border-radius: 6px; border: 1px solid var(--ce-border); overflow-x: auto; }
+  pre { margin: 0; font-family: 'Geist Mono'; font-size: 0.8rem; color: var(--ce-brand-300); }
+  
+  .dialog-footer { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 0.5rem; }
+  .action-btn-primary { background: white; color: black; border: none; padding: 0.8rem; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+  .danger-btn { background: #e5484d; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; cursor: pointer; }
+  .ghost-btn { background: none; border: none; color: var(--ce-text-muted); cursor: pointer; }
+  .secondary-btn, .action-btn { background: var(--ce-bg-card); border: 1px solid var(--ce-border); border-radius: 6px; padding: 0.6rem; cursor: pointer; color: white; display: flex; align-items: center; gap: 0.5rem; }
+</style>

@@ -1,0 +1,31 @@
+/* packages/core/src/styles/components/footer.css */
+
+.bottom-bar {
+  height: 40px; background: var(--ce-bg-footer); padding: 0 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--ce-font-engineering); font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--ce-text-muted);
+}
+
+.footer-left { display: flex; align-items: center; gap: 1rem; }
+.status-item { display: flex; align-items: center; gap: 0.5rem; }
+
+.pulse-green { 
+  width: 6px; height: 6px; background: var(--ce-status-active); 
+  border-radius: 50%; box-shadow: 0 0 8px var(--ce-status-active); 
+}
+.active-green { color: var(--ce-status-active); font-weight: 700; }
+.label { color: var(--ce-text-muted); font-weight: 500; }
+
+.bottom-bar code { 
+  color: var(--ce-brand-500); background: var(--ce-bg-card); 
+  padding: 2px 5px; border-radius: 3px; border: 1px solid var(--ce-border); 
+}
+
+.version { font-weight: 600; opacity: 0.8; }
+
+/* FIX: Esconder info pesada em ecrãs pequenos */
+@media (max-width: 640px) {
+  .status-item .label, .status-item.desktop-only, .sep { display: none !important; }
+  .bottom-bar { padding: 0 1rem; }
+}
