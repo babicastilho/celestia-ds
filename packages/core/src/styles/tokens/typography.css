@@ -1,8 +1,9 @@
 /* --- TOKENS: FAMÍLIAS TIPOGRÁFICAS --- */
 :root {
-  --ce-font-authority: 'Lora', serif;
-  --ce-font-interface: 'Geist', system-ui, -apple-system, sans-serif;
-  --ce-font-engineering: 'Geist Mono', monospace;
+  --ce-font-authority:    'Lora', serif;
+  --ce-font-serif: var(--ce-font-authority);
+  --ce-font-interface:    'Geist', system-ui, -apple-system, sans-serif;
+  --ce-font-engineering:  'Geist Mono', monospace;
 
   /* --- TOKENS: ESCALA DE TAMANHOS (TYPE SCALE) --- */
   /* Estes tokens alimentam a tua página de Foundations e garantem a escala vertical */
