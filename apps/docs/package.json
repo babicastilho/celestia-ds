@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "@celestia/docs",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@celestia/core": "workspace:*",
     "@iconify-json/lucide": "^1.2.82",
     "astro": "^5.16.6"
   }
