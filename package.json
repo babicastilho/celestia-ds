@@ -1,21 +1,23 @@
 {
-  "name": "celestia-master",
+  "name": "celestia-ds",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "version": "0.0.1",
+  "type": "module",
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
-    "dev:docs": "npm run dev -w apps/docs",
-    "dev:web": "npm run dev -w apps/web",
-    "build": "npm run build --workspaces --if-present",
-    "install-all": "npm install"
+    "dev": "pnpm --filter docs dev",
+    "dev:docs": "pnpm --filter docs dev",
+    "build": "pnpm -r --if-present build",
+    "install-all": "pnpm install",
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test"
   },
   "dependencies": {
     "astro-icon": "^1.1.5"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.82"
-  }
+    "@iconify-json/lucide": "^1.2.82",
+    "@changesets/cli": "^2.27.7"
+  },
+  "packageManager": "pnpm@9.15.9"
 }
