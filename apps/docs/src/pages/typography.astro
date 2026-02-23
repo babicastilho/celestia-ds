@@ -1,0 +1,75 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import DocHeader from '../components/DocHeader.astro';
+import DocSection from '../components/DocSection.astro';
+import TypographySwatch from '../components/TypographySwatch.astro';
+import TypeSample from '../components/TypeSample.astro';
+
+const fonts = [
+  { name: 'Lora', variable: '--ce-font-authority', weights: [400, 700] },
+  { name: 'Geist Sans', variable: '--ce-font-interface', weights: [400, 600] },
+  { name: 'Geist Mono', variable: '--ce-font-engineering', weights: [400, 600] }
+];
+
+const typeScale = [
+  { label: '5XL', value: '48px', var: '--ce-size-5xl', font: '--ce-font-authority' },
+  { label: '4XL', value: '36px', var: '--ce-size-4xl', font: '--ce-font-authority' },
+  { label: '3XL', value: '30px', var: '--ce-size-3xl', font: '--ce-font-interface' },
+  { label: '2XL', value: '24px', var: '--ce-size-2xl', font: '--ce-font-interface' },
+  { label: 'XL', value: '20px', var: '--ce-size-xl', font: '--ce-font-engineering' },
+  { label: 'LG', value: '18px', var: '--ce-size-lg', font: '--ce-font-interface' },
+  { label: 'BASE', value: '16px', var: '--ce-size-base', font: '--ce-font-interface' },
+  { label: 'SM', value: '14px', var: '--ce-size-sm', font: '--ce-font-interface' },
+  { label: 'XS', value: '12px', var: '--ce-size-xs', font: '--ce-font-engineering' }
+];
+
+const tocHeadings = [
+  { id: 'families', text: 'Font Families' },
+  { id: 'scale', text: 'Type Scale' }
+];
+---
+
+<MainLayout title="Typography Foundations" headings={tocHeadings}>
+  <DocHeader title="Typography Scale" badge="Tokens" intro="Diretrizes de escala e famílias tipográficas do Celestia." />
+
+  <div class="typography-container">
+    <DocSection title="Font Families" id="families" layout="grid">
+      {fonts.map((f) => f.weights.map((w) => <TypographySwatch family={f.variable} weight={w} name={f.name} />))}
+    </DocSection>
+
+    <DocSection title="Type Scale" id="scale" layout="list">
+      {typeScale.map((s) => <TypeSample label={s.label} value={s.value} variable={s.var} family={s.font} />)}
+    </DocSection>
+  </div>
+</MainLayout>
+
+<script>
+  function initCopy() {
+    document.querySelectorAll('.copy-trigger').forEach(trigger => {
+      trigger.addEventListener('click', async () => {
+        const text = trigger.getAttribute('data-copy');
+        const icon = trigger.querySelector('svg');
+        if (!text || !icon) return;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          const originalPath = icon.innerHTML;
+          // Feedback Visual: Troca para ícone de Check
+          icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+          trigger.style.color = "var(--ce-green-500)";
+          
+          setTimeout(() => {
+            icon.innerHTML = originalPath;
+            trigger.style.color = "";
+          }, 2000);
+        } catch (e) { console.error(e); }
+      });
+    });
+  }
+  initCopy();
+  document.addEventListener('astro:page-load', initCopy);
+</script>
+
+<style>
+  .typography-container { padding-bottom: 8rem; display: flex; flex-direction: column; gap: 4rem; }
+</style>

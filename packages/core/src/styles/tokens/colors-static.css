@@ -1,0 +1,102 @@
+:root {
+  /* BRAND RAMPS */
+  --ce-brand-50:  color-mix(in oklch, var(--ce-brand-500), white 95%);
+  --ce-brand-100: color-mix(in oklch, var(--ce-brand-500), white 90%);
+  --ce-brand-200: color-mix(in oklch, var(--ce-brand-500), white 80%);
+  --ce-brand-300: color-mix(in oklch, var(--ce-brand-500), white 60%);
+  --ce-brand-400: color-mix(in oklch, var(--ce-brand-500), white 30%);
+  --ce-brand-600: color-mix(in oklch, var(--ce-brand-500), black 10%);
+  --ce-brand-700: color-mix(in oklch, var(--ce-brand-500), black 25%);
+  --ce-brand-800: color-mix(in oklch, var(--ce-brand-500), black 40%);
+  --ce-brand-900: color-mix(in oklch, var(--ce-brand-500), black 60%);
+  --ce-brand-950: color-mix(in oklch, var(--ce-brand-500), black 80%);
+
+  /* ACCENT RAMPS */
+  --ce-accent-50:  color-mix(in oklch, var(--ce-accent-500), white 95%);
+  --ce-accent-100: color-mix(in oklch, var(--ce-accent-500), white 90%);
+  --ce-accent-200: color-mix(in oklch, var(--ce-accent-500), white 80%);
+  --ce-accent-300: color-mix(in oklch, var(--ce-accent-500), white 60%);
+  --ce-accent-400: color-mix(in oklch, var(--ce-accent-500), white 30%);
+  --ce-accent-600: color-mix(in oklch, var(--ce-accent-500), black 10%);
+  --ce-accent-700: color-mix(in oklch, var(--ce-accent-500), black 25%);
+  --ce-accent-800: color-mix(in oklch, var(--ce-accent-500), black 40%);
+  --ce-accent-900: color-mix(in oklch, var(--ce-accent-500), black 60%);
+  --ce-accent-950: color-mix(in oklch, var(--ce-accent-500), black 80%);
+
+  /* STATIC BASES (500) */
+  --ce-slate-500: #64748b;
+  --ce-red-500: oklch(63% 0.24 25);
+  --ce-orange-500: oklch(70% 0.19 45);
+  --ce-amber-500: oklch(78% 0.16 70);
+  --ce-yellow-500: oklch(85% 0.18 95);
+  --ce-lime-500: oklch(75% 0.18 130);
+  --ce-green-500: oklch(65% 0.20 145);
+  --ce-emerald-500: oklch(65% 0.18 160);
+  --ce-teal-500: oklch(73% 0.16 180);
+  --ce-cyan-500: oklch(75% 0.15 230);
+  --ce-sky-500: oklch(70% 0.16 240);
+  --ce-blue-500: oklch(60% 0.20 250);
+  --ce-indigo-500: oklch(55% 0.22 270);
+  --ce-violet-500: oklch(60% 0.22 290);
+  --ce-purple-500: oklch(55% 0.22 310);
+  --ce-fuchsia-500: oklch(60% 0.22 330);
+  --ce-pink-500: oklch(65% 0.20 350);
+  --ce-rose-500: oklch(60% 0.22 15);
+
+  /* FULL STATIC SCALES (color-mix generated) */
+  /* SLATE */
+  --ce-slate-50: #f8fafc; --ce-slate-100: #f1f5f9; --ce-slate-200: #e2e8f0; --ce-slate-300: #cbd5e1;
+  --ce-slate-400: #94a3b8; --ce-slate-600: #475569; --ce-slate-700: #334155; --ce-slate-800: #1e293b; 
+  --ce-slate-900: #0f172a; --ce-slate-950: #020617;
+
+  /* RED */
+  --ce-red-50: color-mix(in oklch, var(--ce-red-500), white 95%); --ce-red-100: color-mix(in oklch, var(--ce-red-500), white 90%); --ce-red-200: color-mix(in oklch, var(--ce-red-500), white 80%); --ce-red-300: color-mix(in oklch, var(--ce-red-500), white 60%); --ce-red-400: color-mix(in oklch, var(--ce-red-500), white 30%); --ce-red-600: color-mix(in oklch, var(--ce-red-500), black 10%); --ce-red-700: color-mix(in oklch, var(--ce-red-500), black 25%); --ce-red-800: color-mix(in oklch, var(--ce-red-500), black 40%); --ce-red-900: color-mix(in oklch, var(--ce-red-500), black 60%); --ce-red-950: color-mix(in oklch, var(--ce-red-500), black 80%);
+
+  /* ORANGE */
+  --ce-orange-50: color-mix(in oklch, var(--ce-orange-500), white 95%); --ce-orange-100: color-mix(in oklch, var(--ce-orange-500), white 90%); --ce-orange-200: color-mix(in oklch, var(--ce-orange-500), white 80%); --ce-orange-300: color-mix(in oklch, var(--ce-orange-500), white 60%); --ce-orange-400: color-mix(in oklch, var(--ce-orange-500), white 30%); --ce-orange-600: color-mix(in oklch, var(--ce-orange-500), black 10%); --ce-orange-700: color-mix(in oklch, var(--ce-orange-500), black 25%); --ce-orange-800: color-mix(in oklch, var(--ce-orange-500), black 40%); --ce-orange-900: color-mix(in oklch, var(--ce-orange-500), black 60%); --ce-orange-950: color-mix(in oklch, var(--ce-orange-500), black 80%);
+
+  /* AMBER */
+  --ce-amber-50: color-mix(in oklch, var(--ce-amber-500), white 95%); --ce-amber-100: color-mix(in oklch, var(--ce-amber-500), white 90%); --ce-amber-200: color-mix(in oklch, var(--ce-amber-500), white 80%); --ce-amber-300: color-mix(in oklch, var(--ce-amber-500), white 60%); --ce-amber-400: color-mix(in oklch, var(--ce-amber-500), white 30%); --ce-amber-600: color-mix(in oklch, var(--ce-amber-500), black 10%); --ce-amber-700: color-mix(in oklch, var(--ce-amber-500), black 25%); --ce-amber-800: color-mix(in oklch, var(--ce-amber-500), black 40%); --ce-amber-900: color-mix(in oklch, var(--ce-amber-500), black 60%); --ce-amber-950: color-mix(in oklch, var(--ce-amber-500), black 80%);
+
+  /* YELLOW */
+  --ce-yellow-50: color-mix(in oklch, var(--ce-yellow-500), white 95%); --ce-yellow-100: color-mix(in oklch, var(--ce-yellow-500), white 90%); --ce-yellow-200: color-mix(in oklch, var(--ce-yellow-500), white 80%); --ce-yellow-300: color-mix(in oklch, var(--ce-yellow-500), white 60%); --ce-yellow-400: color-mix(in oklch, var(--ce-yellow-500), white 30%); --ce-yellow-600: color-mix(in oklch, var(--ce-yellow-500), black 10%); --ce-yellow-700: color-mix(in oklch, var(--ce-yellow-500), black 25%); --ce-yellow-800: color-mix(in oklch, var(--ce-yellow-500), black 40%); --ce-yellow-900: color-mix(in oklch, var(--ce-yellow-500), black 60%); --ce-yellow-950: color-mix(in oklch, var(--ce-yellow-500), black 80%);
+
+  /* LIME */
+  --ce-lime-50: color-mix(in oklch, var(--ce-lime-500), white 95%); --ce-lime-100: color-mix(in oklch, var(--ce-lime-500), white 90%); --ce-lime-200: color-mix(in oklch, var(--ce-lime-500), white 80%); --ce-lime-300: color-mix(in oklch, var(--ce-lime-500), white 60%); --ce-lime-400: color-mix(in oklch, var(--ce-lime-500), white 30%); --ce-lime-600: color-mix(in oklch, var(--ce-lime-500), black 10%); --ce-lime-700: color-mix(in oklch, var(--ce-lime-500), black 25%); --ce-lime-800: color-mix(in oklch, var(--ce-lime-500), black 40%); --ce-lime-900: color-mix(in oklch, var(--ce-lime-500), black 60%); --ce-lime-950: color-mix(in oklch, var(--ce-lime-500), black 80%);
+
+  /* GREEN */
+  --ce-green-50: color-mix(in oklch, var(--ce-green-500), white 95%); --ce-green-100: color-mix(in oklch, var(--ce-green-500), white 90%); --ce-green-200: color-mix(in oklch, var(--ce-green-500), white 80%); --ce-green-300: color-mix(in oklch, var(--ce-green-500), white 60%); --ce-green-400: color-mix(in oklch, var(--ce-green-500), white 30%); --ce-green-600: color-mix(in oklch, var(--ce-green-500), black 10%); --ce-green-700: color-mix(in oklch, var(--ce-green-500), black 25%); --ce-green-800: color-mix(in oklch, var(--ce-green-500), black 40%); --ce-green-900: color-mix(in oklch, var(--ce-green-500), black 60%); --ce-green-950: color-mix(in oklch, var(--ce-green-500), black 80%);
+
+  /* EMERALD */
+  --ce-emerald-50: color-mix(in oklch, var(--ce-emerald-500), white 95%); --ce-emerald-100: color-mix(in oklch, var(--ce-emerald-500), white 90%); --ce-emerald-200: color-mix(in oklch, var(--ce-emerald-500), white 80%); --ce-emerald-300: color-mix(in oklch, var(--ce-emerald-500), white 60%); --ce-emerald-400: color-mix(in oklch, var(--ce-emerald-500), white 30%); --ce-emerald-600: color-mix(in oklch, var(--ce-emerald-500), black 10%); --ce-emerald-700: color-mix(in oklch, var(--ce-emerald-500), black 25%); --ce-emerald-800: color-mix(in oklch, var(--ce-emerald-500), black 40%); --ce-emerald-900: color-mix(in oklch, var(--ce-emerald-500), black 60%); --ce-emerald-950: color-mix(in oklch, var(--ce-emerald-500), black 80%);
+
+  /* TEAL */
+  --ce-teal-50: color-mix(in oklch, var(--ce-teal-500), white 95%); --ce-teal-100: color-mix(in oklch, var(--ce-teal-500), white 90%); --ce-teal-200: color-mix(in oklch, var(--ce-teal-500), white 80%); --ce-teal-300: color-mix(in oklch, var(--ce-teal-500), white 60%); --ce-teal-400: color-mix(in oklch, var(--ce-teal-500), white 30%); --ce-teal-600: color-mix(in oklch, var(--ce-teal-500), black 10%); --ce-teal-700: color-mix(in oklch, var(--ce-teal-500), black 25%); --ce-teal-800: color-mix(in oklch, var(--ce-teal-500), black 40%); --ce-teal-900: color-mix(in oklch, var(--ce-teal-900), black 60%); --ce-teal-950: color-mix(in oklch, var(--ce-teal-500), black 80%);
+
+  /* CYAN */
+  --ce-cyan-50: color-mix(in oklch, var(--ce-cyan-500), white 95%); --ce-cyan-100: color-mix(in oklch, var(--ce-cyan-500), white 90%); --ce-cyan-200: color-mix(in oklch, var(--ce-cyan-500), white 80%); --ce-cyan-300: color-mix(in oklch, var(--ce-cyan-500), white 60%); --ce-cyan-400: color-mix(in oklch, var(--ce-cyan-500), white 30%); --ce-cyan-600: color-mix(in oklch, var(--ce-cyan-500), black 10%); --ce-cyan-700: color-mix(in oklch, var(--ce-cyan-500), black 25%); --ce-cyan-800: color-mix(in oklch, var(--ce-cyan-500), black 40%); --ce-cyan-900: color-mix(in oklch, var(--ce-cyan-500), black 60%); --ce-cyan-950: color-mix(in oklch, var(--ce-cyan-500), black 80%);
+
+  /* SKY */
+  --ce-sky-50: color-mix(in oklch, var(--ce-sky-500), white 95%); --ce-sky-100: color-mix(in oklch, var(--ce-sky-500), white 90%); --ce-sky-200: color-mix(in oklch, var(--ce-sky-500), white 80%); --ce-sky-300: color-mix(in oklch, var(--ce-sky-500), white 60%); --ce-sky-400: color-mix(in oklch, var(--ce-sky-500), white 30%); --ce-sky-600: color-mix(in oklch, var(--ce-sky-500), black 10%); --ce-sky-700: color-mix(in oklch, var(--ce-sky-500), black 25%); --ce-sky-800: color-mix(in oklch, var(--ce-sky-500), black 40%); --ce-sky-900: color-mix(in oklch, var(--ce-sky-500), black 60%); --ce-sky-950: color-mix(in oklch, var(--ce-sky-500), black 80%);
+
+  /* BLUE */
+  --ce-blue-50: color-mix(in oklch, var(--ce-blue-500), white 95%); --ce-blue-100: color-mix(in oklch, var(--ce-blue-500), white 90%); --ce-blue-200: color-mix(in oklch, var(--ce-blue-500), white 80%); --ce-blue-300: color-mix(in oklch, var(--ce-blue-500), white 60%); --ce-blue-400: color-mix(in oklch, var(--ce-blue-500), white 30%); --ce-blue-600: color-mix(in oklch, var(--ce-blue-500), black 10%); --ce-blue-700: color-mix(in oklch, var(--ce-blue-500), black 25%); --ce-blue-800: color-mix(in oklch, var(--ce-blue-500), black 40%); --ce-blue-900: color-mix(in oklch, var(--ce-blue-500), black 60%); --ce-blue-950: color-mix(in oklch, var(--ce-blue-500), black 80%);
+
+  /* INDIGO */
+  --ce-indigo-50: color-mix(in oklch, var(--ce-indigo-500), white 95%); --ce-indigo-100: color-mix(in oklch, var(--ce-indigo-500), white 90%); --ce-indigo-200: color-mix(in oklch, var(--ce-indigo-500), white 80%); --ce-indigo-300: color-mix(in oklch, var(--ce-indigo-500), white 60%); --ce-indigo-400: color-mix(in oklch, var(--ce-indigo-500), white 30%); --ce-indigo-600: color-mix(in oklch, var(--ce-indigo-500), black 10%); --ce-indigo-700: color-mix(in oklch, var(--ce-indigo-500), black 25%); --ce-indigo-800: color-mix(in oklch, var(--ce-indigo-500), black 40%); --ce-indigo-900: color-mix(in oklch, var(--ce-indigo-500), black 60%); --ce-indigo-950: color-mix(in oklch, var(--ce-indigo-500), black 80%);
+
+  /* VIOLET */
+  --ce-violet-50: color-mix(in oklch, var(--ce-violet-500), white 95%); --ce-violet-100: color-mix(in oklch, var(--ce-violet-500), white 90%); --ce-violet-200: color-mix(in oklch, var(--ce-violet-500), white 80%); --ce-violet-300: color-mix(in oklch, var(--ce-violet-500), white 60%); --ce-violet-400: color-mix(in oklch, var(--ce-violet-500), white 30%); --ce-violet-600: color-mix(in oklch, var(--ce-violet-500), black 10%); --ce-violet-700: color-mix(in oklch, var(--ce-violet-500), black 25%); --ce-violet-800: color-mix(in oklch, var(--ce-violet-500), black 40%); --ce-violet-900: color-mix(in oklch, var(--ce-violet-500), black 60%); --ce-violet-950: color-mix(in oklch, var(--ce-violet-500), black 80%);
+
+  /* PURPLE */
+  --ce-purple-50: color-mix(in oklch, var(--ce-purple-500), white 95%); --ce-purple-100: color-mix(in oklch, var(--ce-purple-500), white 90%); --ce-purple-200: color-mix(in oklch, var(--ce-purple-500), white 80%); --ce-purple-300: color-mix(in oklch, var(--ce-purple-500), white 60%); --ce-purple-400: color-mix(in oklch, var(--ce-purple-500), white 30%); --ce-purple-600: color-mix(in oklch, var(--ce-purple-500), black 10%); --ce-purple-700: color-mix(in oklch, var(--ce-purple-500), black 25%); --ce-purple-800: color-mix(in oklch, var(--ce-purple-500), black 40%); --ce-purple-900: color-mix(in oklch, var(--ce-purple-500), black 60%); --ce-purple-950: color-mix(in oklch, var(--ce-purple-500), black 80%);
+
+  /* FUCHSIA */
+  --ce-fuchsia-50: color-mix(in oklch, var(--ce-fuchsia-500), white 95%); --ce-fuchsia-100: color-mix(in oklch, var(--ce-fuchsia-500), white 90%); --ce-fuchsia-200: color-mix(in oklch, var(--ce-fuchsia-500), white 80%); --ce-fuchsia-300: color-mix(in oklch, var(--ce-fuchsia-500), white 60%); --ce-fuchsia-400: color-mix(in oklch, var(--ce-fuchsia-500), white 30%); --ce-fuchsia-600: color-mix(in oklch, var(--ce-fuchsia-500), black 10%); --ce-fuchsia-700: color-mix(in oklch, var(--ce-fuchsia-500), black 25%); --ce-fuchsia-800: color-mix(in oklch, var(--ce-fuchsia-500), black 40%); --ce-fuchsia-900: color-mix(in oklch, var(--ce-fuchsia-500), black 60%); --ce-fuchsia-950: color-mix(in oklch, var(--ce-fuchsia-500), black 80%);
+
+  /* PINK */
+  --ce-pink-50: color-mix(in oklch, var(--ce-pink-500), white 95%); --ce-pink-100: color-mix(in oklch, var(--ce-pink-500), white 90%); --ce-pink-200: color-mix(in oklch, var(--ce-pink-500), white 80%); --ce-pink-300: color-mix(in oklch, var(--ce-pink-500), white 60%); --ce-pink-400: color-mix(in oklch, var(--ce-pink-500), white 30%); --ce-pink-600: color-mix(in oklch, var(--ce-pink-500), black 10%); --ce-pink-700: color-mix(in oklch, var(--ce-pink-500), black 25%); --ce-pink-800: color-mix(in oklch, var(--ce-pink-500), black 40%); --ce-pink-900: color-mix(in oklch, var(--ce-pink-500), black 60%); --ce-pink-950: color-mix(in oklch, var(--ce-pink-500), black 80%);
+
+  /* ROSE */
+  --ce-rose-50: color-mix(in oklch, var(--ce-rose-500), white 95%); --ce-rose-100: color-mix(in oklch, var(--ce-rose-500), white 90%); --ce-rose-200: color-mix(in oklch, var(--ce-rose-500), white 80%); --ce-rose-300: color-mix(in oklch, var(--ce-rose-500), white 60%); --ce-rose-400: color-mix(in oklch, var(--ce-rose-500), white 30%); --ce-rose-600: color-mix(in oklch, var(--ce-rose-500), black 10%); --ce-rose-700: color-mix(in oklch, var(--ce-rose-500), black 25%); --ce-rose-800: color-mix(in oklch, var(--ce-rose-500), black 40%); --ce-rose-900: color-mix(in oklch, var(--ce-rose-500), black 60%); --ce-rose-950: color-mix(in oklch, var(--ce-rose-500), black 80%);
+}

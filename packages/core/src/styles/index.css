@@ -1,0 +1,22 @@
+/* packages/core/src/styles/index.css */
+
+/* 1. Base & Reset */
+@import './base/reset.css';
+@import './base/layout.css';
+
+/* 2. Tokens */
+@import './tokens/colors-semantic.css';
+@import './tokens/colors-static.css';
+@import './tokens/typography.css';
+
+/* 3. Componentes */
+@import './components/buttons.css';
+@import './components/pickers.css';
+
+/* 4. Utilitários */
+@import './utilities.css';
+@import './components/buttons.css';
+@import './components/pickers.css';
+@import './components/topnav.css';
+@import './components/sidebar.css';
+@import './components/footer.css';

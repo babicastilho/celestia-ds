@@ -1,0 +1,53 @@
+---
+const { title, id, badge, layout = "grid" } = Astro.props;
+---
+<section id={id} class="doc-section">
+  <div class="doc-section-header">
+    <div class="doc-section-info">
+      <h2>{title}</h2>
+      {badge && <span class="static-badge">{badge}</span>}
+    </div>
+    <slot name="header-extra" />
+  </div>
+  
+  <div class={layout === "grid" ? "doc-grid" : "doc-list"}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .doc-section { margin-bottom: 4rem; width: 100%; }
+  .doc-section-header { 
+    display: flex; flex-direction: column; gap: 1.25rem; 
+    border-bottom: 1px solid var(--ce-border); padding-bottom: 1rem; margin-bottom: 1.5rem; 
+  }
+  .doc-section-info { display: flex; align-items: center; gap: 1rem; }
+  h2 { font-family: 'Lora', serif; font-size: 1.6rem; margin: 0; color: var(--ce-text-main); }
+  
+  .static-badge { 
+    background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; 
+    font-size: 0.65rem; font-weight: bold; color: var(--ce-text-muted); border: 1px solid var(--ce-border); 
+  }
+
+  /* Grid para cards (Cores e Fontes) */
+  .doc-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+    gap: 1rem; 
+  }
+
+  /* Lista para Escalas (Type Scale e Hierarchy) */
+  .doc-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .doc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (min-width: 768px) {
+    .doc-section-header { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+  }
+</style>

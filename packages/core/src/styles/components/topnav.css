@@ -1,0 +1,92 @@
+/* packages/core/src/styles/components/topnav.css */
+
+.top-nav {
+  height: 100%; width: 100%; display: flex; align-items: center; 
+  justify-content: space-between; padding: 0 1.5rem;
+}
+
+.nav-left, .nav-right, .actions-group { display: flex; align-items: center; }
+.nav-right { gap: 1.5rem; }
+.actions-group { gap: 0.5rem; }
+
+.logo-wrapper { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+
+/* FIX: Neutralizar o fundo bizarro */
+.logo-svg { 
+  width: 32px; height: 32px; 
+  display: flex; align-items: center; justify-content: center;
+  background: transparent !important; /* MATA O BRANCO NO CONTAINER */
+}
+
+/* FIX: Garantir que o SVG em si não tem background herdado */
+.logo-svg svg { 
+  width: 100%; height: 100%; 
+  background: transparent !important; /* MATA O BRANCO NO ELEMENTO */
+  filter: drop-shadow(0 0 8px rgba(var(--ce-brand-rgb), 0.2)); /* Opcional: glow suave */
+}
+
+.logo-text { 
+  font-family: var(--ce-font-authority); font-weight: 700; font-size: 1.6rem; 
+  color: var(--ce-text-main); letter-spacing: -0.02em; 
+}
+.dot { color: var(--ce-brand-500); }
+
+.desktop-links { display: flex; gap: 1.5rem; }
+.desktop-links a { text-decoration: none; color: var(--ce-text-muted); font-size: 0.95rem; transition: 0.2s; }
+.desktop-links a:hover { color: var(--ce-text-main); }
+
+.separator { width: 1px; height: 24px; background: var(--ce-border); }
+
+.icon-btn { 
+  background: none; border: none; cursor: pointer; color: var(--ce-text-muted); 
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; 
+}
+.icon-btn svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+.icon-btn:hover { color: var(--ce-text-main); }
+
+.sun { display: none; }
+:global(html:not(.dark)) .moon { display: none; }
+:global(html:not(.dark)) .sun { display: block; }
+
+.theme-toggle :global(svg) {
+  width: 24px !important;
+  height: 24px !important;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-btn { 
+  background: none; border: none; cursor: pointer; 
+  position: relative; width: 40px; height: 40px; 
+  color: var(--ce-text-muted);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1300; 
+}
+
+.icon-stack { 
+  position: relative; width: 32px; height: 32px; 
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* FIX: Removido :global para os ícones se sobreporem em posição absoluta */
+.icon-stack svg { 
+  width: 24px !important; height: 24px !important; 
+  position: absolute; 
+  top: 50%; left: 50%;
+  margin-top: -12px; margin-left: -12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+  transform-origin: center;
+}
+
+.icon-close { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+/* Estados de Animação */
+body.menu-open .icon-menu { opacity: 0; transform: rotate(90deg) scale(0.5); }
+body.menu-open .icon-close { opacity: 1; transform: rotate(0deg) scale(1); color: var(--ce-text-main); }
+
+@media (max-width: 1024px) {
+  .desktop-only, .desktop-links, .separator { display: none; }
+  .logo-text { font-size: 1.5rem; }
+}
