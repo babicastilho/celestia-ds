@@ -1,7 +1,7 @@
 {
   "name": "celestia-ds",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0-alpha",
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter docs dev",
@@ -16,8 +16,8 @@
     "astro-icon": "^1.1.5"
   },
   "devDependencies": {
-    "@iconify-json/lucide": "^1.2.82",
-    "@changesets/cli": "^2.27.7"
+    "@changesets/cli": "^2.29.8",
+    "@iconify-json/lucide": "^1.2.82"
   },
   "packageManager": "pnpm@9.15.9"
 }

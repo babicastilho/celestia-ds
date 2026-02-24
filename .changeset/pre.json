@@ -1,0 +1,9 @@
+{
+  "mode": "exit",
+  "tag": "alpha",
+  "initialVersions": {
+    "@celestia/docs": "0.1.0",
+    "@celestia/core": "0.1.0"
+  },
+  "changesets": []
+}
