@@ -1,15 +1,38 @@
 ---
 // apps/docs/src/components/Footer.astro
+import { readFileSync } from "fs";
+import { resolve } from "path";
+
+const pkg = JSON.parse(
+  readFileSync(resolve("package.json"), "utf-8")
+);
+
+const version = pkg.version ?? "0.0.0";
+
+const env = (() => {
+  if (import.meta.env.VERCEL_GIT_COMMIT_REF) {
+    return import.meta.env.VERCEL_GIT_COMMIT_REF;
+  }
+  try {
+    const head = readFileSync(resolve("../../.git/HEAD"), "utf-8").trim();
+    return head.replace("ref: refs/heads/", "");
+  } catch {
+    return "local";
+  }
+})();
 ---
+
 <div class="bottom-bar">
   <div class="footer-left">
-      <span class="status-item">
-          <span class="pulse-green"></span>
-          <span class="label">ENGINE:</span> <span class="active-green">ACTIVE</span>
-      </span>
-      <span class="status-item desktop-only">
-          <span class="label">ENV:</span> <code>FEAT/APP-SHELL</code>
-      </span>
+    <span class="status-item">
+      <span class="pulse-green"></span>
+      <span class="label">ENGINE:</span>
+      <span class="active-green">ACTIVE</span>
+    </span>
+    <span class="status-item desktop-only">
+      <span class="label">ENV:</span>
+      <code>{env.toUpperCase()}</code>
+    </span>
   </div>
-  <div class="version">V0.1.0-ALPHA</div>
+  <div class="version">V{version.toUpperCase()}</div>
 </div>
