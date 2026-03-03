@@ -31,37 +31,4 @@ jobs:
           commit: "chore: version packages"
           title: "chore: release"
         env:
-          GITHUB_TOKEN: ${{ name: Release
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: write
-  pull-requests: write
-
-jobs:
-  changesets:
-    if: github.actor != 'github-actions[bot]'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm -r --if-present lint
-      - run: pnpm -r --if-present typecheck
-      - run: pnpm -r --if-present test
-
-      - uses: changesets/action@v1
-        with:
-          version: pnpm changeset version
-          commit: "chore: version packages"
-          title: "chore: release"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.CHANGESETS_TOKEN }}
