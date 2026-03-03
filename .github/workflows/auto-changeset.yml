@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   auto-changeset:
+    # Só roda para PRs do mesmo repo (não roda em forks)
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
 
@@ -32,7 +33,15 @@ jobs:
         run: |
           labels='${{ toJson(github.event.pull_request.labels.*.name) }}'
 
+          # Se explicitamente disser "release:none", não cria changeset
           if echo "$labels" | grep -q '"release:none"'; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Só cria changeset se existir alguma label release:*
+          # (evita "patch default" em PR sem intenção de release)
+          if ! echo "$labels" | grep -q '"release:'; then
             echo "skip=true" >> $GITHUB_OUTPUT
             exit 0
           fi
@@ -52,11 +61,13 @@ jobs:
             exit 0
           fi
 
-          echo "level=patch" >> $GITHUB_OUTPUT
+          # Se tiver release:* mas não for major/minor/patch, não faz nada
+          echo "skip=true" >> $GITHUB_OUTPUT
 
       - name: Create changeset if missing
         if: steps.level.outputs.skip != 'true'
         run: |
+          # Se já existe algum changeset no PR, não cria outro
           if ls .changeset/*.md >/dev/null 2>&1; then
             echo "Changeset already exists."
             exit 0
@@ -65,7 +76,7 @@ jobs:
           FILE=".changeset/auto-$(date +%s).md"
           LEVEL="${{ steps.level.outputs.level }}"
 
-          cat > $FILE <<EOF
+          cat > "$FILE" <<EOF
           ---
           "@celestia/core": $LEVEL
           ---
@@ -75,6 +86,6 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add $FILE
+          git add "$FILE"
           git commit -m "chore: add auto changeset"
           git push

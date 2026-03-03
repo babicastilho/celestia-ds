@@ -65,4 +65,19 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @celestia/docs build
-      
+
+  changeset-status:
+    # Só exige changeset em pull_request
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure changeset exists
+        run: |
+          if ls .changeset/*.md >/dev/null 2>&1; then
+            echo "Changeset found."
+          else
+            echo "❌ No changeset found. Add a changeset file or apply release:none label."
+            exit 1
+          fi
