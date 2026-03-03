@@ -1,0 +1,80 @@
+name: Auto Changeset
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, reopened]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  auto-changeset:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Determine release level
+        id: level
+        run: |
+          labels='${{ toJson(github.event.pull_request.labels.*.name) }}'
+
+          if echo "$labels" | grep -q '"release:none"'; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if echo "$labels" | grep -q '"release:major"'; then
+            echo "level=major" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if echo "$labels" | grep -q '"release:minor"'; then
+            echo "level=minor" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          if echo "$labels" | grep -q '"release:patch"'; then
+            echo "level=patch" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "level=patch" >> $GITHUB_OUTPUT
+
+      - name: Create changeset if missing
+        if: steps.level.outputs.skip != 'true'
+        run: |
+          if ls .changeset/*.md >/dev/null 2>&1; then
+            echo "Changeset already exists."
+            exit 0
+          fi
+
+          FILE=".changeset/auto-$(date +%s).md"
+          LEVEL="${{ steps.level.outputs.level }}"
+
+          cat > $FILE <<EOF
+          ---
+          "@celestia/core": $LEVEL
+          ---
+
+          Auto changeset ($LEVEL)
+          EOF
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add $FILE
+          git commit -m "chore: add auto changeset"
+          git push

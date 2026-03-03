@@ -1,0 +1,5 @@
+/* system/tokens/src/index.css */
+
+@import './colors-semantic.css';
+@import './colors-static.css';
+@import './typography.css';

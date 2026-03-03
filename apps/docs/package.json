@@ -9,7 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@celestia/core": "workspace:*",
+    "@celestia/tokens": "workspace:*",
+    "@celestia/foundations": "workspace:*",
     "@iconify-json/lucide": "^1.2.82",
     "astro": "^5.16.6"
   }
