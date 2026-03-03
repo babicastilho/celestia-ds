@@ -4,7 +4,8 @@ import { join, relative } from "path";
 
 const IGNORE = new Set([
   "node_modules", ".git", ".changeset",
-  "dist", ".astro", "coverage", ".turbo"
+  "dist", ".astro", "coverage", ".turbo",
+  "storybook-static", "debug-storybook.log"
 ]);
 
 function walk(dir: string, depth = 0): string {

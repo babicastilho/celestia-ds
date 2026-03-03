@@ -1,0 +1,14 @@
+{
+  "name": "@celestia/foundations",
+  "version": "0.0.0",
+  "private": true,
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "dependencies": {
+    "@celestia/tokens": "workspace:*"
+  },
+  "exports": {
+    ".": "./src/index.css"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@celestia/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./src/index.css"
+  }
+}

@@ -24,5 +24,6 @@ pnpm-debug.log*
 .idea/
 
 # Storybook build output
-packages/core/storybook-static
+**/storybook-static
+**/*.log
 

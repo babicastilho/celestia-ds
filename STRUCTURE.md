@@ -6,6 +6,7 @@
     📄 ci.yml
     📄 release.yml
 📄 .gitignore
+📄 STRUCTURE.md
 📁 apps
   📁 docs
     📄 .env
@@ -13,6 +14,7 @@
     📁 .vscode
       📄 extensions.json
       📄 launch.json
+    📄 CHANGELOG.md
     📄 README.md
     📄 astro.config.mjs
     📄 package.json
@@ -37,19 +39,44 @@
         📄 colors.astro
         📄 index.astro
         📄 typography.astro
+      📁 styles
+        📄 buttons.css
+        📄 docs.css
+        📄 footer.css
+        📄 index.css
+        📄 layout.css
+        📄 pickers.css
+        📄 sidebar.css
+        📄 topnav.css
+        📄 utilities.css
     📄 tsconfig.json
 📄 package.json
 📁 packages
   📁 core
+
+📄 pnpm-lock.yaml
+📄 pnpm-workspace.yaml
+📄 readme.md
+📁 scripts
+  📄 list-structure.ts
+📁 system
+  📁 foundations
+    📄 package.json
+    📁 src
+      📁 base
+        📄 reset.css
+      📄 index.css
+  📁 react
     📁 .storybook
       📄 main.js
       📄 preview.js
       📄 vitest.setup.js
-    📄 debug-storybook.log
+    📄 CHANGELOG.md
+    📄 eslint.config.js
     📄 package.json
     📁 src
-      📁 components
-
+      📁 __tests__
+        📄 setup.test.ts
       📁 stories
         📄 Button.jsx
         📄 Button.stories.js
@@ -78,102 +105,14 @@
         📄 button.css
         📄 header.css
         📄 page.css
-      📁 styles
-        📁 base
-          📄 layout.css
-          📄 reset.css
-        📁 components
-          📄 buttons.css
-          📄 docs.css
-          📄 footer.css
-          📄 pickers.css
-          📄 sidebar.css
-          📄 topnav.css
-        📄 index.css
-        📁 tokens
-          📄 colors-semantic.css
-          📄 colors-static.css
-          📄 typography.css
-        📄 tokens.css
-        📄 utilities.css
-        📁 utils
-
-      📁 tokens
-
-    📁 storybook-static
-      📁 addon-visual-tests-assets
-        📄 visual-test-illustration.mp4
-      📁 assets
-        📄 Button-B2efaGtC.css
-        📄 Button-Csj8NYSf.js
-        📄 Button.stories-D8j_uu6f.js
-        📄 Color-6BZIO3FS-CDB7_Vrf.js
-        📄 Configure-DiITzm9p.js
-        📄 DocsRenderer-LL677BLK-ByYvI1QU.js
-        📄 Header-BZUFqV41.js
-        📄 Header-Ck-SSN7O.css
-        📄 Header.stories-CfjOAICY.js
-        📄 Page-CeeQJVdd.css
-        📄 Page.stories-BxV1YIz0.js
-        📄 WithTooltip-65CFNBJE-Bejzfwz0.js
-        📄 accessibility-W_h2acOZ.png
-        📄 addon-library-BWUCAmyN.png
-        📄 axe--jlLS_6H.js
-        📄 blocks-nXk1Gxoy.js
-        📄 context-C0qIqeS4.png
-        📄 docs---vsFbMi.png
-        📄 figma-plugin-CH2hELiO.png
-        📄 formatter-EIJCOSYU-BfoVv3jB.js
-        📄 iframe-w_5_ikUj.js
-        📄 index-DbudmAPq.js
-        📄 index-hCUsLCub.js
-        📄 matchers-5TDFFDYO-BEZorklP.js
-        📄 preload-helper-Dp1pzeXC.js
-        📄 react-18-iBAZLvv_.js
-        📄 share-DGA-UcQf.png
-        📄 styling-Bk6zjRzU.png
-        📄 syntaxhighlighter-ED5Y7EFY-CP3DtMZ2.js
-        📄 testing-cbzR9l9r.png
-        📄 theming-D6WJLNoW.png
-      📄 favicon-wrapper.svg
-      📄 favicon.svg
-      📄 iframe.html
-      📄 index.html
-      📄 index.json
-      📄 nunito-sans-bold-italic.woff2
-      📄 nunito-sans-bold.woff2
-      📄 nunito-sans-italic.woff2
-      📄 nunito-sans-regular.woff2
-      📄 project.json
-      📁 sb-addons
-        📁 a11y-3
-          📄 manager-bundle.js
-        📁 chromatic-com-storybook-1
-          📄 manager-bundle.js
-          📄 manager-bundle.js.LEGAL.txt
-        📁 docs-4
-          📄 manager-bundle.js
-        📁 storybook-core-server-presets-0
-          📄 common-manager-bundle.js
-        📁 vitest-2
-          📄 manager-bundle.js
-      📁 sb-common-assets
-        📄 favicon-wrapper.svg
-        📄 favicon.svg
-        📄 nunito-sans-bold-italic.woff2
-        📄 nunito-sans-bold.woff2
-        📄 nunito-sans-italic.woff2
-        📄 nunito-sans-regular.woff2
-      📁 sb-manager
-        📄 globals-runtime.js
-        📄 globals.js
-        📄 manager-stores.js
-        📄 runtime.js
-      📄 vite-inject-mocker-entry.js
-    📄 vitest.config.js
-📄 pnpm-lock.yaml
-📄 pnpm-workspace.yaml
-📄 readme.md
-📁 scripts
-  📄 list-structure.ts
+    📄 tsconfig.json
+    📄 vitest.config.ts
+    📄 vitest.storybook.config.js
+  📁 tokens
+    📄 package.json
+    📁 src
+      📄 colors-semantic.css
+      📄 colors-static.css
+      📄 index.css
+      📄 typography.css
 ```
