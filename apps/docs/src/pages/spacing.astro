@@ -1,0 +1,160 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import DocHeader from '../components/DocHeader.astro';
+import DocSection from '../components/DocSection.astro';
+
+const spacingScale = [
+  { step: '1', value: '4px', variable: '--spacing-1' },
+  { step: '2', value: '8px', variable: '--spacing-2' },
+  { step: '3', value: '12px', variable: '--spacing-3' },
+  { step: '4', value: '16px', variable: '--spacing-4' },
+  { step: '5', value: '20px', variable: '--spacing-5' },
+  { step: '6', value: '24px', variable: '--spacing-6' },
+  { step: '7', value: '32px', variable: '--spacing-7' },
+  { step: '8', value: '40px', variable: '--spacing-8' },
+  { step: '9', value: '48px', variable: '--spacing-9' },
+  { step: '10', value: '80px', variable: '--spacing-10' }
+];
+
+const layoutExamples = [
+  {
+    title: 'Stack Gap',
+    variable: '--spacing-4',
+    value: '16px',
+    code: 'gap: var(--spacing-4);',
+    description: 'Use gap para espaçamento entre elementos irmãos em stacks e grupos.'
+  },
+  {
+    title: 'Card Padding',
+    variable: '--spacing-6',
+    value: '24px',
+    code: 'padding: var(--spacing-6);',
+    description: 'Use padding para o espaço interno de superfícies e containers.'
+  },
+  {
+    title: 'Section Spacing',
+    variable: '--spacing-8',
+    value: '40px',
+    code: 'margin-block: var(--spacing-8);',
+    description: 'Use margin-block para separar secções e blocos maiores de conteúdo.'
+  }
+];
+
+const utilityGroups = [
+  {
+    title: 'Margin',
+    items: ['.m-*', '.mt-*', '.mb-*', '.ml-*', '.mr-*', '.mx-*', '.my-*']
+  },
+  {
+    title: 'Padding',
+    items: ['.p-*', '.pt-*', '.pb-*', '.pl-*', '.pr-*', '.px-*', '.py-*']
+  }
+];
+
+const tocHeadings = [
+  { id: 'scale', text: 'Spacing Scale' },
+  { id: 'layouts', text: 'Applied in Layouts' },
+  { id: 'utilities', text: 'Utilities Reference' }
+];
+---
+
+<MainLayout title="Spacing Foundations" headings={tocHeadings}>
+  <DocHeader
+    title="Spacing"
+    badge="Foundations"
+    intro="Sistema de espaçamento do Celestia baseado em tokens reutilizáveis para composições consistentes."
+  />
+
+  <div class="spacing-docs">
+    <DocSection title="Spacing Scale" id="scale" layout="list">
+      <div class="spacing-docs__scale-grid">
+        {spacingScale.map((space) => (
+          <article class="spacing-docs__scale-card">
+            <div class="spacing-docs__scale-card-top">
+              <span class="spacing-docs__scale-number">{space.step}</span>
+
+              <div class="spacing-docs__scale-meta">
+                <strong>{space.variable}</strong>
+                <span>{space.value}</span>
+              </div>
+            </div>
+
+            <div class="spacing-docs__scale-preview">
+              <div
+                class="spacing-docs__scale-bar"
+                style={`width: var(${space.variable});`}
+              ></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </DocSection>
+
+    <DocSection title="Applied in Layouts" id="layouts" layout="list">
+      <div class="spacing-docs__layouts-grid">
+        {layoutExamples.map((example) => (
+          <article class="spacing-docs__example-card">
+            <div class="spacing-docs__example-top">
+              <div class="spacing-docs__example-heading">
+                <h3>{example.title}</h3>
+                <p>{example.description}</p>
+              </div>
+
+              <div class="spacing-docs__example-token">
+                <span>{example.variable}</span>
+                <strong>{example.value}</strong>
+              </div>
+            </div>
+
+            <div class="spacing-docs__example-surface">
+              {example.title === 'Stack Gap' && (
+                <div class="spacing-demo-stack" style={`gap: var(${example.variable});`}>
+                  <div class="spacing-demo-block"></div>
+                  <div class="spacing-demo-block"></div>
+                  <div class="spacing-demo-block"></div>
+                </div>
+              )}
+
+              {example.title === 'Card Padding' && (
+                <div class="spacing-demo-card" style={`padding: var(${example.variable});`}>
+                  <div class="spacing-demo-card__inner">Content</div>
+                </div>
+              )}
+
+              {example.title === 'Section Spacing' && (
+                <div class="spacing-demo-section">
+                  <div class="spacing-demo-section__item"></div>
+                  <div
+                    class="spacing-demo-section__item spacing-demo-section__item--offset"
+                    style={`margin-block-start: var(${example.variable});`}
+                  ></div>
+                </div>
+              )}
+            </div>
+
+            <div class="spacing-docs__example-code-wrap">
+              <code class="spacing-docs__code">{example.code}</code>
+            </div>
+          </article>
+        ))}
+      </div>
+    </DocSection>
+
+    <DocSection title="Utilities Reference" id="utilities" layout="grid">
+      {utilityGroups.map((group) => (
+        <article class="spacing-docs__utility-card">
+          <div class="spacing-docs__utility-header">
+            <h3>{group.title}</h3>
+            <span>Derived from spacing tokens</span>
+          </div>
+
+          <div class="spacing-docs__utility-list">
+            {group.items.map((item) => (
+              <code class="spacing-docs__utility-token">{item}</code>
+            ))}
+          </div>
+        </article>
+      ))}
+    </DocSection>
+  </div>
+</MainLayout>

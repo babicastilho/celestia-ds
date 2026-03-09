@@ -1,43 +1,66 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { navigation } from '../config/navigation';
+
 const pathname = new URL(Astro.request.url).pathname;
-const isFoundationsActive = pathname === '/' || pathname.includes('/colors') || pathname.includes('/typography');
-const isComponentsActive = pathname.includes('/components') || pathname.includes('/buttons');
+
+const visibleSections = navigation.filter((section) => section.items.length > 0);
+
+const isItemActive = (href: string) =>
+  pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
+
+const isSectionActive = (items: { href: string }[]) =>
+  items.some((item) => isItemActive(item.href));
 ---
+
 <aside class="sidebar-inner">
-    <nav class="side-nav" id="accordion-nav">
-        <div class:list={["accordion-item", { "is-active": isFoundationsActive }]}>
-            <button class="accordion-trigger">Foundations <Icon name="lucide:chevron-down" class="chevron" /></button>
-            <div class="accordion-content">
-                <a href="/" class={pathname === '/' ? 'active' : ''}>Overview</a>
-                <a href="/colors" class={pathname.includes('/colors') ? 'active' : ''}>Colors</a>
-                <a href="/typography" class={pathname.includes('/typography') ? 'active' : ''}>Typography</a>
-            </div>
+  <nav class="side-nav" id="accordion-nav">
+    {visibleSections.map((section) => (
+      <div class:list={['accordion-item', { 'is-active': isSectionActive(section.items) }]}>
+        <button class="accordion-trigger">
+          {section.title}
+          <Icon name="lucide:chevron-down" class="chevron" />
+        </button>
+
+        <div class="accordion-content">
+          {section.items.map((item) => (
+            <a href={item.href} class={isItemActive(item.href) ? 'active' : ''}>
+              {item.label}
+            </a>
+          ))}
         </div>
-        <div class:list={["accordion-item", { "is-active": isComponentsActive }]}>
-            <button class="accordion-trigger">Components <Icon name="lucide:chevron-down" class="chevron" /></button>
-            <div class="accordion-content">
-                <a href="#" class={pathname.includes('/buttons') ? 'active' : ''}>Buttons</a>
-                <a href="#">Inputs</a>
-                <a href="#">Cards</a>
-            </div>
-        </div>
-    </nav>
-    <div class="sidebar-mobile-footer">
-        <a href="/docs" class="footer-icon"><Icon name="lucide:book" /></a>
-        <a href="/cookbook" class="footer-icon"><Icon name="lucide:shapes" /></a>
-        <a href="https://github.com" target="_blank" class="footer-icon"><Icon name="lucide:github" /></a>
-    </div>
+      </div>
+    ))}
+  </nav>
+
+  <div class="sidebar-mobile-footer">
+    <a href="/docs" class="footer-icon">
+      <Icon name="lucide:book" />
+    </a>
+    <a href="/cookbook" class="footer-icon">
+      <Icon name="lucide:shapes" />
+    </a>
+    <a href="https://github.com" target="_blank" class="footer-icon">
+      <Icon name="lucide:github" />
+    </a>
+  </div>
 </aside>
+
 <script>
-    const nav = document.getElementById('accordion-nav');
-    nav?.querySelectorAll('.accordion-trigger').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            const currentItem = (e.target as HTMLElement).closest('.accordion-item');
-            if (!currentItem) return;
-            const wasOpen = currentItem.classList.contains('is-active');
-            nav.querySelectorAll('.accordion-item').forEach(item => item.classList.remove('is-active'));
-            if (!wasOpen) currentItem.classList.add('is-active');
-        });
+  const nav = document.getElementById('accordion-nav');
+
+  nav?.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      const currentItem = e.currentTarget.closest('.accordion-item');
+      if (!currentItem) return;
+
+      const wasOpen = currentItem.classList.contains('is-active');
+
+      nav.querySelectorAll('.accordion-item').forEach((item) => {
+        item.classList.remove('is-active');
+      });
+
+      if (!wasOpen) currentItem.classList.add('is-active');
     });
+  });
 </script>

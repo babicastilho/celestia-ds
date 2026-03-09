@@ -1,4 +1,7 @@
 /* system/foundations/src/index.css */
 
-@import './base/reset.css';
+@import "@celestia/tokens";
+
+@import "./base/reset.css";
+@import "./utilities/spacing.css";
 
