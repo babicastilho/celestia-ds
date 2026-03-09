@@ -3,8 +3,9 @@
 ```
 📁 .github
   📁 workflows
+    📄 auto-changeset.yml.disabled
     📄 ci.yml
-    📄 release.yml
+    📄 release.yml.disabled
 📄 .gitignore
 📄 STRUCTURE.md
 📁 apps
@@ -51,9 +52,6 @@
         📄 utilities.css
     📄 tsconfig.json
 📄 package.json
-📁 packages
-  📁 core
-
 📄 pnpm-lock.yaml
 📄 pnpm-workspace.yaml
 📄 readme.md
